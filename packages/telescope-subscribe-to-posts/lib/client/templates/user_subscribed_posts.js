@@ -1,4 +1,4 @@
-Template[getTemplate('userSubscribedPosts')].created = function () {
+Template.userSubscribedPosts.created = function () {
   var user = this.data,
       instance = this;
 
@@ -15,18 +15,18 @@ Template[getTemplate('userSubscribedPosts')].created = function () {
 
     // get the new terms and generate new parameters from them
     var terms = instance.terms.get();
-    var parameters = getPostsParameters(terms);
+    var parameters = Posts.getSubParams(terms);
 
     // subscribe to the userPosts publication
     instance.subscription = Meteor.subscribe('userSubscribedPosts', terms);
 
     // update the instance's "posts" cursor
     instance.posts.set(Posts.find(parameters.find, parameters.options));
-    
+
   });
 };
 
-Template[getTemplate('userSubscribedPosts')].helpers({
+Template.userSubscribedPosts.helpers({
   posts: function () {
     var user = this,
         posts = Template.instance().posts.get().fetch();
@@ -42,7 +42,7 @@ Template[getTemplate('userSubscribedPosts')].helpers({
   }
 });
 
-Template[getTemplate('userSubscribedPosts')].events({
+Template.userSubscribedPosts.events({
   'click .subscribedposts-more': function (e) {
     e.preventDefault();
     var terms = Template.instance().terms.get();

@@ -1,20 +1,13 @@
-var coreSubscriptions = new SubsManager({
-  // cache recent 50 subscriptions
-  cacheLimit: 50,
-  // expire any subscription after 30 minutes
-  expireIn: 30
-});
-
-PostsDailyController = RouteController.extend({
+var PostsDailyController = RouteController.extend({
 
   onBeforeAction: function () {
-    this.render(getTemplate('postListTop'), {to: 'postListTop'});
+    this.render('postListTop', {to: 'postListTop'});
     this.next();
   },
 
   template: function() {
     // use a function to make sure the template is evaluated *after* any template overrides
-    return getTemplate('postsDaily');
+    return 'postsDaily';
   },
 
   subscriptions: function () {

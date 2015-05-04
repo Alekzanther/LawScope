@@ -1,6 +1,6 @@
 Meteor.startup(function () {
 
-  PostsSearchController = PostsListController.extend({
+  Posts.controllers.search = Posts.controllers.list.extend({
     view: 'search',
     showViewsNav: false,
     getTitle: function() {
@@ -20,7 +20,7 @@ Meteor.startup(function () {
           Session.set('searchQuery', query.q);
         }
         if (query.q) {
-          Meteor.call('logSearch', query.q)
+          Meteor.call('logSearch', query.q);
         }
       }
       this.next();
@@ -33,13 +33,13 @@ Meteor.startup(function () {
 
   Router.route('/search/:limit?', {
     name: 'search',
-    controller: PostsSearchController
+    controller: Posts.controllers.search
   });
 
   // Search Logs
 
   Router.route('/logs/:limit?', {
-    controller: AdminController,
+    controller: Telescope.controllers.admin,
     name: 'searchLogs',
     waitOn: function () {
       var limit = this.params.limit || 100;

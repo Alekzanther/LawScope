@@ -1,11 +1,9 @@
-threadModules.push(
-  {
-    template: 'postSubscribe',
-    order: 10
-  }
-);
+Telescope.modules.register("thread", {
+  template: 'postSubscribe',
+  order: 10
+});
 
-addToPostSchema.push(
+Posts.registerField(
   {
     propertyName: 'subscribers',
     propertySchema: {
@@ -18,7 +16,7 @@ addToPostSchema.push(
   }
 );
 
-addToPostSchema.push(
+Posts.registerField(
   {
     propertyName: 'subscriberCount',
     propertySchema: {
@@ -31,14 +29,12 @@ addToPostSchema.push(
   }
 );
 
-userProfileEdit.push(
-  {
-    template: 'userSubscribedPosts',
-    order: 5
-  }
-);
+Telescope.modules.register("profileEdit", {
+  template: 'userSubscribedPosts',
+  order: 5
+});
 
-viewParameters.userSubscribedPosts = function (terms) {
+Telescope.viewParameters.userSubscribedPosts = function (terms) {
   var user = Meteor.users.findOne(terms.userId),
       postsIds = [];
 
@@ -76,7 +72,7 @@ var removeSubscribedItem = function (userId, itemId, collection) {
 subscribeItem = function (collection, itemId, user) {
   var item = collection.findOne(itemId),
       collectionName = collection._name.slice(0,1).toUpperCase() + collection._name.slice(1);
-      
+
   if (!user || !item || hasSubscribedItem(item, user))
     return false;
 

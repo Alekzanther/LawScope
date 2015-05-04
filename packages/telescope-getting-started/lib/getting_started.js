@@ -1,4 +1,4 @@
-addToPostSchema.push(
+Posts.registerField(
   {
     propertyName: 'dummySlug',
     propertySchema: {
@@ -11,7 +11,7 @@ addToPostSchema.push(
   }
 );
 
-addToPostSchema.push(
+Posts.registerField(
   {
     propertyName: 'isDummy',
     propertySchema: {
@@ -24,7 +24,7 @@ addToPostSchema.push(
   }
 );
 
-addToCommentsSchema.push(
+Comments.registerField(
   {
     propertyName: 'isDummy',
     propertySchema: {

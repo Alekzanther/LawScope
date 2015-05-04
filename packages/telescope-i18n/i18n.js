@@ -1,3 +1,5 @@
+i18n = {};
+
 // do this better:
 setLanguage = function (language) {
   // Session.set('i18nReady', false);
@@ -30,15 +32,26 @@ setLanguage = function (language) {
   T9n.setLanguage(language);
 }
 
-i18n = {
-  t: function (str, options) {
-    if (Meteor.isServer) {
-      return TAPi18n.__(str, options, Settings.get('language', 'en'));
-    } else {
-      return TAPi18n.__(str, options);
-    }
+i18n.t = function (str, options) {
+  if (Meteor.isServer) {
+    return TAPi18n.__(str, options, Settings.get('language', 'en'));
+  } else {
+    return TAPi18n.__(str, options);
   }
 };
+
+SimpleSchema.prototype.internationalize = function () {
+  var schema = this._schema;
+
+  _.each(schema, function (property, key) {
+    if (!property.label) {
+      schema[key].label = function () {
+        return i18n.t(key)
+      };
+    }
+  });
+  return this;
+}
 
 Meteor.startup(function () {
 

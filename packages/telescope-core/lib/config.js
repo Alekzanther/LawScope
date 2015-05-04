@@ -85,7 +85,7 @@ if (Meteor.isClient) {
 }
 
 
-postModules.push({
+/*postModules.push({
   template: 'postDownvote',
   order: 15
-});
+});*/

@@ -1,6 +1,11 @@
 // Session variables
 Session.set('postsLimit', Settings.get('postsPerPage', 10));
 
+postModules.push({
+  template: 'postDownvote',
+  order: 30
+});
+
 // Sort postModules array position using modulePositions as index
 postModules = _.sortBy(postModules, 'order');
 

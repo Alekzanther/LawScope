@@ -266,11 +266,11 @@
 	.icon{
 	}
 }
-.post-upvote {
+.post-upvote{
 	@include small{
 		text-align: center;
 	}
-	.upvote-link {
+	.upvote-link{
 		display: block;
 		.icon-upvote{
 			&:before {
@@ -290,14 +290,50 @@
 				display: none;
 			}
 			i.icon-voted {
-				border: 1px solid $lighter-text;
+				border: 1px solid $green;
 				display: inline-block;
-				color: $lighter-text;
+				color: $dark-grey;
+				background: $green;
 				// opacity: 0.5;
 			}
 		}
 	}
 }
+
+.post-downvote{
+	@include small{
+		text-align: center;
+	}
+	.downvote-link{
+		display: block;
+		.icon-downvote{
+			&:before {
+				top: -1px;
+				position: relative;
+			}
+		}
+		&.not-voted:hover {
+			i{
+				// opacity: 1;
+				text-shadow: none;
+			}
+		}
+		&.voted {
+			cursor: default;
+			i.icon-downvote {
+				display: none;
+			}
+			i.icon-voted {
+				border: 1px solid $red;
+				display: inline-block;
+				color: $lighter-grey;
+				background: $red;
+				// opacity: 0.5;
+			}
+		}
+	}
+}
+
 .post-content {
 	min-height: $grid-unit - 30px;
 	.post-sticky {

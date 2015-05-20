@@ -1,0 +1,13 @@
+<template name="postDownvote">
+  {{#if downvoted}}
+    <a class="downvote-link voted action" title="{{_ "downvoted"}}">
+      {{{icon "voted" "icon-circle"}}}
+      <span class="sr-only">{{_ "downvoted"}}</span>
+    </a>
+  {{else}}
+    <a class="downvote-link not-voted action" href="#" title="{{_ "downvote_"}}">
+      {{{icon "downvote" "icon-circle"}}}
+      <span class="sr-only">{{_ "downvote_"}}</span>
+    </a>
+  {{/if}}
+</template>
